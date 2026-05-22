@@ -256,9 +256,19 @@ body {
   </div>
 </div>
 
-<audio autoplay loop>
+<audio id="bgMusic" loop>
   <source src="birthday-music.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+document.addEventListener("click", () => {
+  const music = document.getElementById("bgMusic");
+
+  if (music.paused) {
+    music.play();
+  }
+}, { once: true });
+</script>
 
 <script>
 function birthdayMessage() {
