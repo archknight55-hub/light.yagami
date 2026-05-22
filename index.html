@@ -144,12 +144,30 @@ body {
   color: #ffe6f5;
 }
 
-.secret video {
-  margin-top: 18px;
-  width: min(700px, 90vw);
-  border-radius: 25px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
-}
+<details class="secret">
+  <summary>🌸 Secret Birthday Recording 🌸</summary>
+
+  <video id="birthdayVideo" controls>
+    <source src="birthday-message.mp4" type="video/mp4">
+  </video>
+</details>
+
+<script>
+const video = document.getElementById("birthdayVideo");
+const music = document.getElementById("bgMusic");
+
+video.addEventListener("play", () => {
+  music.pause();
+});
+
+video.addEventListener("pause", () => {
+  music.play();
+});
+
+video.addEventListener("ended", () => {
+  music.play();
+});
+</script>
 
 .footer {
   margin-top: 35px;
@@ -302,28 +320,3 @@ window.onload = () => {
 
 </body>
 </html>
-
-<details class="secret">
-  <summary>🌸 Secret Birthday Recording 🌸</summary>
-
-  <video id="birthdayVideo" controls>
-    <source src="birthday-message.mp4" type="video/mp4">
-  </video>
-</details>
-
-<script>
-const video = document.getElementById("birthdayVideo");
-const music = document.getElementById("bgMusic");
-
-video.addEventListener("play", () => {
-  music.pause();
-});
-
-video.addEventListener("pause", () => {
-  music.play();
-});
-
-video.addEventListener("ended", () => {
-  music.play();
-});
-</script>
