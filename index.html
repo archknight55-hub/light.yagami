@@ -302,3 +302,28 @@ window.onload = () => {
 
 </body>
 </html>
+
+<details class="secret">
+  <summary>🌸 Secret Birthday Recording 🌸</summary>
+
+  <video id="birthdayVideo" controls>
+    <source src="birthday-message.mp4" type="video/mp4">
+  </video>
+</details>
+
+<script>
+const video = document.getElementById("birthdayVideo");
+const music = document.getElementById("bgMusic");
+
+video.addEventListener("play", () => {
+  music.pause();
+});
+
+video.addEventListener("pause", () => {
+  music.play();
+});
+
+video.addEventListener("ended", () => {
+  music.play();
+});
+</script>
