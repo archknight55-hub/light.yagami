@@ -21,23 +21,37 @@
   box-sizing:border-box;
 }
 
+html,body{
+  width:100%;
+  height:100%;
+}
+
 body{
   overflow:hidden;
   font-family:'Poppins',sans-serif;
-  height:100vh;
   color:white;
   position:relative;
 
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
   background:
-  radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 28%),
-  radial-gradient(circle at bottom right, rgba(255,255,255,0.1), transparent 35%),
-  linear-gradient(-45deg,#62cfff,#5f8dff,#7276ff,#56dfff);
+  linear-gradient(
+    -45deg,
+    #61d0ff,
+    #5d90ff,
+    #7577ff,
+    #57dfff
+  );
 
   background-size:400% 400%;
-  animation:gradientFlow 18s ease infinite;
+  animation:bgFlow 18s ease infinite;
 }
 
-@keyframes gradientFlow{
+/* ANIMATED GRADIENT */
+
+@keyframes bgFlow{
   0%{
     background-position:0% 50%;
   }
@@ -51,120 +65,247 @@ body{
   }
 }
 
-/* BACKGROUND WAVES */
+/* VIGNETTE */
+
+body::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(circle at center,
+  transparent 45%,
+  rgba(0,0,0,0.28));
+
+  pointer-events:none;
+  z-index:1;
+}
+
+/* SOFT MESH BLOBS */
+
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:0.38;
+  animation:blobMove 14s ease-in-out infinite;
+}
+
+.blob1{
+  width:420px;
+  height:420px;
+
+  background:#ffffff;
+
+  top:-140px;
+  left:-100px;
+}
+
+.blob2{
+  width:500px;
+  height:500px;
+
+  background:#93d6ff;
+
+  bottom:-180px;
+  right:-120px;
+
+  animation-delay:3s;
+}
+
+.blob3{
+  width:320px;
+  height:320px;
+
+  background:#b5a2ff;
+
+  top:35%;
+  left:45%;
+
+  opacity:0.18;
+  animation-delay:5s;
+}
+
+@keyframes blobMove{
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-25px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+}
+
+/* WAVE TEXTURES */
 
 .wave{
   position:absolute;
-  width:250%;
-  height:280px;
+
+  width:220%;
+  height:260px;
+
   left:-60%;
+
   border-radius:43%;
-  opacity:0.08;
-  background:white;
-  animation:waveMove linear infinite;
+
+  background:rgba(255,255,255,0.12);
+
+  animation:waveRotate linear infinite;
 }
 
 .wave1{
-  bottom:-180px;
+  bottom:-160px;
   animation-duration:18s;
 }
 
 .wave2{
   bottom:-210px;
-  opacity:0.06;
-  animation-duration:26s;
+  opacity:0.08;
+  animation-duration:28s;
 }
 
 .wave3{
-  top:-190px;
-  opacity:0.05;
+  top:-180px;
+  opacity:0.06;
   animation-duration:36s;
 }
 
-.wave4{
-  top:30%;
-  opacity:0.03;
-  animation-duration:42s;
-}
-
-@keyframes waveMove{
+@keyframes waveRotate{
   0%{
-    transform:translateX(0) rotate(0deg);
+    transform:rotate(0deg);
   }
 
   100%{
-    transform:translateX(-12%) rotate(360deg);
+    transform:rotate(360deg);
   }
 }
 
-/* WAVE LINE PATTERN */
+/* LINE PATTERN */
 
-.wave-pattern{
+.pattern{
   position:absolute;
   inset:0;
-  opacity:0.08;
 
   background-image:
-  repeating-radial-gradient(
-    circle at 0 0,
-    transparent 0,
-    transparent 18px,
-    rgba(255,255,255,0.3) 20px
+  repeating-linear-gradient(
+    120deg,
+    rgba(255,255,255,0.04) 0px,
+    rgba(255,255,255,0.04) 2px,
+    transparent 2px,
+    transparent 24px
   );
 
-  animation:patternMove 30s linear infinite;
+  opacity:0.5;
+
+  z-index:0;
 }
 
-@keyframes patternMove{
+/* MAIN CONTENT */
+
+.container{
+  position:relative;
+  z-index:5;
+
+  width:100%;
+  max-width:900px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:40px 25px;
+}
+
+/* TITLE */
+
+.title{
+  font-family:'Pacifico',cursive;
+
+  font-size:5.5rem;
+  line-height:1.1;
+
+  text-shadow:
+  0 0 20px rgba(255,255,255,0.3),
+  0 0 40px rgba(255,255,255,0.15);
+
+  animation:titleFloat 5s ease-in-out infinite;
+}
+
+@keyframes titleFloat{
   0%{
     transform:translateY(0px);
   }
 
+  50%{
+    transform:translateY(-12px);
+  }
+
   100%{
-    transform:translateY(-60px);
+    transform:translateY(0px);
   }
 }
 
-/* GLOW LIGHTS */
+/* TEXT */
 
-.glow{
+.subtitle{
+  margin-top:28px;
+
+  max-width:760px;
+
+  font-size:1.18rem;
+  line-height:2;
+
+  color:rgba(255,255,255,0.95);
+
+  text-shadow:0 0 12px rgba(0,0,0,0.12);
+}
+
+.highlight{
+  color:#ffe7a3;
+  font-weight:700;
+}
+
+/* FLOWERS */
+
+.flower{
   position:absolute;
-  border-radius:50%;
-  filter:blur(100px);
-  opacity:0.25;
+
+  font-size:72px;
+
+  opacity:0.22;
+
+  animation:drift 10s ease-in-out infinite;
 }
 
-.glow1{
-  width:380px;
-  height:380px;
-  background:#ffffff;
-  top:-140px;
-  left:-100px;
+@keyframes drift{
+  0%{
+    transform:translateY(0px) rotate(0deg);
+  }
+
+  50%{
+    transform:translateY(-20px) rotate(8deg);
+  }
+
+  100%{
+    transform:translateY(0px) rotate(0deg);
+  }
 }
 
-.glow2{
-  width:450px;
-  height:450px;
-  background:#89d4ff;
-  bottom:-180px;
-  right:-120px;
-}
-
-.glow3{
-  width:250px;
-  height:250px;
-  background:#bca7ff;
-  top:35%;
-  left:40%;
-  opacity:0.12;
-}
-
-/* FLOATING STARS */
+/* STARS */
 
 .star{
   position:absolute;
-  color:white;
+
   opacity:0.7;
+
   animation:twinkle 3s ease-in-out infinite;
 }
 
@@ -185,105 +326,17 @@ body{
   }
 }
 
-/* FLOWERS */
-
-.flower{
-  position:absolute;
-  font-size:72px;
-  opacity:0.22;
-
-  animation:drift 10s ease-in-out infinite;
-}
-
-@keyframes drift{
-  0%{
-    transform:translateY(0px) rotate(0deg);
-  }
-
-  50%{
-    transform:translateY(-20px) rotate(8deg);
-  }
-
-  100%{
-    transform:translateY(0px) rotate(0deg);
-  }
-}
-
-/* MAIN CONTENT */
-
-.container{
-  position:relative;
-  z-index:5;
-
-  width:100%;
-  min-height:100vh;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-
-  text-align:center;
-
-  padding:25px;
-}
-
-.title{
-  font-family:'Pacifico',cursive;
-
-  font-size:5.4rem;
-  line-height:1.1;
-
-  text-shadow:
-  0 0 20px rgba(255,255,255,0.3),
-  0 0 40px rgba(255,255,255,0.18);
-
-  animation:floatTitle 5s ease-in-out infinite;
-}
-
-@keyframes floatTitle{
-  0%{
-    transform:translateY(0px);
-  }
-
-  50%{
-    transform:translateY(-12px);
-  }
-
-  100%{
-    transform:translateY(0px);
-  }
-}
-
-.subtitle{
-  margin-top:30px;
-
-  max-width:760px;
-
-  font-size:1.18rem;
-  line-height:2;
-
-  color:rgba(255,255,255,0.95);
-
-  text-shadow:0 0 12px rgba(0,0,0,0.12);
-}
-
-.highlight{
-  color:#ffe7a3;
-  font-weight:700;
-}
-
 /* BUTTON */
 
 .button{
   margin-top:40px;
 
-  padding:16px 36px;
+  padding:16px 38px;
 
   border:none;
   border-radius:999px;
 
-  background:rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.16);
 
   backdrop-filter:blur(12px);
 
@@ -296,19 +349,19 @@ body{
 
   transition:0.35s ease;
 
-  box-shadow:0 10px 35px rgba(0,0,0,0.2);
+  box-shadow:0 10px 35px rgba(0,0,0,0.18);
 }
 
 .button:hover{
   transform:scale(1.08);
 
-  background:rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.28);
 }
 
 /* SECRET AUDIO */
 
 .secret{
-  margin-top:28px;
+  margin-top:30px;
 }
 
 .secret summary{
@@ -316,18 +369,19 @@ body{
   list-style:none;
 
   font-size:1.08rem;
+
   color:#ffe7f5;
 }
 
 .secret audio{
   margin-top:18px;
-  width:min(430px,90vw);
+  width:min(420px,90vw);
 }
 
 /* FOOTER */
 
 .footer{
-  margin-top:42px;
+  margin-top:40px;
 
   font-size:1.05rem;
 
@@ -342,14 +396,17 @@ body{
     overflow:auto;
   }
 
+  .container{
+    padding:60px 20px;
+  }
+
   .title{
-    font-size:3.4rem;
+    font-size:3.5rem;
   }
 
   .subtitle{
     font-size:1rem;
     line-height:1.9;
-    padding:0 10px;
   }
 
   .flower{
@@ -357,7 +414,7 @@ body{
   }
 
   .button{
-    padding:15px 28px;
+    padding:15px 30px;
   }
 }
 
@@ -366,37 +423,37 @@ body{
 
 <body>
 
+<!-- PATTERN -->
+
+<div class="pattern"></div>
+
+<!-- BLOBS -->
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
 <!-- WAVES -->
 
 <div class="wave wave1"></div>
 <div class="wave wave2"></div>
 <div class="wave wave3"></div>
-<div class="wave wave4"></div>
-
-<div class="wave-pattern"></div>
-
-<!-- GLOWS -->
-
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
-<div class="glow glow3"></div>
 
 <!-- FLOWERS -->
 
 <div class="flower" style="top:7%;left:7%;">🌸</div>
-<div class="flower" style="top:15%;right:9%;">🌷</div>
+<div class="flower" style="top:14%;right:9%;">🌷</div>
 <div class="flower" style="bottom:10%;left:10%;">🌼</div>
 <div class="flower" style="bottom:8%;right:12%;">🌺</div>
-<div class="flower" style="top:42%;left:2%;">🦋</div>
+<div class="flower" style="top:44%;left:2%;">🦋</div>
 <div class="flower" style="top:48%;right:3%;">✨</div>
 
 <!-- STARS -->
 
-<div class="star" style="top:12%;left:22%;font-size:22px;">✦</div>
+<div class="star" style="top:14%;left:25%;font-size:22px;">✦</div>
 <div class="star" style="top:28%;right:18%;font-size:16px;">✧</div>
-<div class="star" style="bottom:18%;left:32%;font-size:18px;">✦</div>
-<div class="star" style="bottom:30%;right:25%;font-size:20px;">✧</div>
-<div class="star" style="top:50%;left:15%;font-size:14px;">✦</div>
+<div class="star" style="bottom:20%;left:30%;font-size:18px;">✦</div>
+<div class="star" style="bottom:32%;right:25%;font-size:20px;">✧</div>
 
 <!-- CONTENT -->
 
@@ -452,7 +509,7 @@ body{
 
 <script>
 
-/* START MUSIC ON FIRST CLICK */
+/* START MUSIC */
 
 document.addEventListener("click", () => {
 
@@ -464,7 +521,7 @@ document.addEventListener("click", () => {
 
 }, { once:true });
 
-/* SECRET AUDIO PAUSES BG MUSIC */
+/* SECRET AUDIO */
 
 const secretAudio = document.getElementById("secretAudio");
 const bgMusic = document.getElementById("bgMusic");
@@ -481,7 +538,7 @@ secretAudio.addEventListener("ended", () => {
   bgMusic.play();
 });
 
-/* BUTTON MESSAGE */
+/* BUTTON */
 
 function birthdayMessage(){
 
@@ -489,33 +546,25 @@ function birthdayMessage(){
 
 }
 
-/* BIGGER CONFETTI */
+/* CONFETTI */
 
 window.onload = () => {
 
-  const duration = 5 * 1000;
-  const animationEnd = Date.now() + duration;
-
-  const defaults = {
-    startVelocity: 35,
-    spread: 360,
-    ticks: 80,
-    zIndex: 999
-  };
+  const duration = 5000;
+  const end = Date.now() + duration;
 
   const interval = setInterval(() => {
 
-    const timeLeft = animationEnd - Date.now();
-
-    if(timeLeft <= 0){
-      return clearInterval(interval);
+    if(Date.now() > end){
+      clearInterval(interval);
+      return;
     }
 
-    const particleCount = 80 * (timeLeft / duration);
-
     confetti({
-      ...defaults,
-      particleCount,
+      particleCount:120,
+      spread:140,
+      startVelocity:45,
+      ticks:120,
       origin:{
         x:Math.random(),
         y:Math.random() - 0.2
