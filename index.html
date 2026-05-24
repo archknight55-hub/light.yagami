@@ -23,11 +23,12 @@
 
 html,body{
   width:100%;
-  height:100%;
-  overflow:hidden;
+  min-height:100%;
 }
 
 body{
+  overflow-x:hidden;
+
   font-family:'Poppins',sans-serif;
   color:white;
   position:relative;
@@ -36,10 +37,12 @@ body{
   justify-content:center;
   align-items:center;
 
+  padding:40px 20px;
+
   background:
-  radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 30%),
-  radial-gradient(circle at bottom right, rgba(255,255,255,0.12), transparent 35%),
-  linear-gradient(-45deg,#61d0ff,#5d90ff,#7277ff,#57dfff);
+  radial-gradient(circle at top left, rgba(255,255,255,0.14), transparent 28%),
+  radial-gradient(circle at bottom right, rgba(255,255,255,0.1), transparent 35%),
+  linear-gradient(-45deg,#61d0ff,#5d90ff,#7378ff,#57dfff);
 
   background-size:400% 400%;
   animation:bgFlow 18s ease infinite;
@@ -70,27 +73,25 @@ body::after{
 
   background:
   radial-gradient(circle at center,
-  transparent 40%,
-  rgba(0,0,0,0.35));
+  transparent 42%,
+  rgba(0,0,0,0.38));
 
-  z-index:1;
   pointer-events:none;
+  z-index:1;
 }
 
 /* AURORA */
 
 .aurora{
   position:absolute;
-  width:120%;
-  height:120%;
+  inset:-20%;
 
   background:
-  radial-gradient(circle at 20% 20%, rgba(255,255,255,0.16), transparent 30%),
-  radial-gradient(circle at 80% 30%, rgba(173,216,255,0.16), transparent 30%),
-  radial-gradient(circle at 50% 80%, rgba(255,255,255,0.1), transparent 35%);
+  radial-gradient(circle at 20% 20%, rgba(255,255,255,0.14), transparent 30%),
+  radial-gradient(circle at 80% 30%, rgba(173,216,255,0.12), transparent 30%),
+  radial-gradient(circle at 50% 80%, rgba(255,255,255,0.08), transparent 35%);
 
   animation:auroraMove 18s ease infinite;
-  z-index:0;
 }
 
 @keyframes auroraMove{
@@ -112,10 +113,11 @@ body::after{
 .wave{
   position:absolute;
 
-  width:220%;
-  height:280px;
+  width:230%;
+  height:300px;
 
   left:-60%;
+
   border-radius:43%;
 
   background:rgba(255,255,255,0.08);
@@ -124,18 +126,18 @@ body::after{
 }
 
 .wave1{
-  bottom:-180px;
+  bottom:-200px;
   animation-duration:18s;
 }
 
 .wave2{
-  bottom:-230px;
+  bottom:-250px;
   opacity:0.05;
   animation-duration:30s;
 }
 
 .wave3{
-  top:-200px;
+  top:-220px;
   opacity:0.04;
   animation-duration:40s;
 }
@@ -150,7 +152,7 @@ body::after{
   }
 }
 
-/* MESH LIGHTS */
+/* MESH BLOBS */
 
 .blob{
   position:absolute;
@@ -183,7 +185,7 @@ body::after{
   background:#bca7ff;
   top:35%;
   left:40%;
-  opacity:0.12;
+  opacity:0.14;
 }
 
 @keyframes blobFloat{
@@ -200,7 +202,55 @@ body::after{
   }
 }
 
-/* FLOATING PETALS */
+/* RINGS */
+
+.ring{
+  position:absolute;
+
+  border-radius:50%;
+
+  border:2px solid rgba(255,255,255,0.12);
+
+  animation:ringRotate 20s linear infinite;
+}
+
+.ring1{
+  width:520px;
+  height:520px;
+}
+
+.ring2{
+  width:720px;
+  height:720px;
+
+  border-width:3px;
+
+  animation-direction:reverse;
+  animation-duration:28s;
+}
+
+.ring3{
+  width:900px;
+  height:900px;
+
+  border-width:1px;
+
+  opacity:0.4;
+
+  animation-duration:45s;
+}
+
+@keyframes ringRotate{
+  0%{
+    transform:rotate(0deg);
+  }
+
+  100%{
+    transform:rotate(360deg);
+  }
+}
+
+/* PETALS */
 
 .petal{
   position:absolute;
@@ -222,7 +272,7 @@ body::after{
   }
 
   100%{
-    transform:translateY(110vh) translateX(80px) rotate(360deg);
+    transform:translateY(120vh) translateX(90px) rotate(360deg);
     opacity:0;
   }
 }
@@ -231,6 +281,7 @@ body::after{
 
 .star{
   position:absolute;
+
   animation:twinkle 3s ease-in-out infinite;
 }
 
@@ -251,7 +302,7 @@ body::after{
   }
 }
 
-/* CONTENT */
+/* MAIN CONTENT */
 
 .container{
   position:relative;
@@ -260,26 +311,27 @@ body::after{
   width:100%;
   max-width:900px;
 
-  padding:40px 25px;
-
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
   text-align:center;
+
+  padding:50px 20px;
 }
 
 /* TITLE */
 
 .title{
   font-family:'Pacifico',cursive;
-  font-size:5.8rem;
-  line-height:1.1;
+
+  font-size:5rem;
+  line-height:1.15;
 
   text-shadow:
   0 0 25px rgba(255,255,255,0.35),
-  0 0 45px rgba(255,255,255,0.2);
+  0 0 45px rgba(255,255,255,0.18);
 
   animation:titleFloat 5s ease-in-out infinite;
 }
@@ -290,7 +342,7 @@ body::after{
   }
 
   50%{
-    transform:translateY(-12px);
+    transform:translateY(-10px);
   }
 
   100%{
@@ -298,51 +350,17 @@ body::after{
   }
 }
 
-/* GLOW RING */
-
-.ring{
-  position:absolute;
-
-  width:500px;
-  height:500px;
-
-  border-radius:50%;
-
-  border:1px solid rgba(255,255,255,0.08);
-
-  animation:ringRotate 20s linear infinite;
-
-  z-index:-1;
-}
-
-.ring2{
-  width:650px;
-  height:650px;
-  animation-direction:reverse;
-  animation-duration:28s;
-}
-
-@keyframes ringRotate{
-  0%{
-    transform:rotate(0deg);
-  }
-
-  100%{
-    transform:rotate(360deg);
-  }
-}
-
-/* TEXT */
+/* SUBTITLE */
 
 .subtitle{
-  margin-top:30px;
+  margin-top:35px;
 
   max-width:760px;
 
-  font-size:1.18rem;
-  line-height:2;
+  font-size:1.12rem;
+  line-height:2.1;
 
-  color:rgba(255,255,255,0.95);
+  color:rgba(255,255,255,0.96);
 
   text-shadow:0 0 12px rgba(0,0,0,0.12);
 }
@@ -357,7 +375,7 @@ body::after{
 .button{
   margin-top:40px;
 
-  padding:16px 38px;
+  padding:17px 42px;
 
   border:none;
   border-radius:999px;
@@ -387,7 +405,7 @@ body::after{
 /* SECRET AUDIO */
 
 .secret{
-  margin-top:30px;
+  margin-top:32px;
 }
 
 .secret summary{
@@ -419,34 +437,38 @@ body::after{
 @media(max-width:768px){
 
   body{
-    overflow:auto;
-  }
-
-  .container{
-    padding:70px 20px;
+    align-items:flex-start;
+    padding:50px 15px;
   }
 
   .title{
-    font-size:3.6rem;
+    font-size:3rem;
+    line-height:1.25;
   }
 
   .subtitle{
-    font-size:1rem;
-    line-height:1.9;
+    font-size:0.98rem;
+    line-height:2;
   }
 
   .button{
-    padding:15px 30px;
+    width:100%;
+    max-width:320px;
   }
 
-  .ring{
+  .ring1{
     width:320px;
     height:320px;
   }
 
   .ring2{
-    width:450px;
-    height:450px;
+    width:470px;
+    height:470px;
+  }
+
+  .ring3{
+    width:620px;
+    height:620px;
   }
 }
 
@@ -467,52 +489,67 @@ body::after{
 <div class="wave wave2"></div>
 <div class="wave wave3"></div>
 
-<!-- FLOATING PETALS -->
+<!-- RINGS -->
+
+<div class="ring ring1"></div>
+<div class="ring ring2"></div>
+<div class="ring ring3"></div>
+
+<!-- PETALS -->
 
 <div class="petal" style="left:5%;animation-duration:12s;">🌸</div>
-<div class="petal" style="left:15%;animation-duration:16s;">🌸</div>
-<div class="petal" style="left:25%;animation-duration:18s;">🌸</div>
-<div class="petal" style="left:40%;animation-duration:13s;">🌸</div>
-<div class="petal" style="left:55%;animation-duration:17s;">🌸</div>
-<div class="petal" style="left:70%;animation-duration:14s;">🌸</div>
-<div class="petal" style="left:85%;animation-duration:19s;">🌸</div>
+<div class="petal" style="left:18%;animation-duration:16s;">🌸</div>
+<div class="petal" style="left:32%;animation-duration:18s;">🌸</div>
+<div class="petal" style="left:45%;animation-duration:13s;">🌸</div>
+<div class="petal" style="left:60%;animation-duration:17s;">🌸</div>
+<div class="petal" style="left:74%;animation-duration:15s;">🌸</div>
+<div class="petal" style="left:88%;animation-duration:20s;">🌸</div>
 
 <!-- STARS -->
 
-<div class="star" style="top:12%;left:25%;font-size:20px;">✦</div>
-<div class="star" style="top:20%;right:18%;font-size:16px;">✧</div>
-<div class="star" style="bottom:22%;left:30%;font-size:18px;">✦</div>
-<div class="star" style="bottom:28%;right:24%;font-size:18px;">✧</div>
+<div class="star" style="top:12%;left:20%;font-size:18px;">✦</div>
+<div class="star" style="top:18%;right:18%;font-size:15px;">✧</div>
+<div class="star" style="bottom:22%;left:26%;font-size:18px;">✦</div>
+<div class="star" style="bottom:30%;right:24%;font-size:18px;">✧</div>
 
 <!-- CONTENT -->
 
 <div class="container">
 
-  <div class="ring"></div>
-  <div class="ring ring2"></div>
-
   <div class="title">
-    Happy Birthday 💙
+    Happy Birthday Kira08 💙<br>
+    My Bourgeoisie Friend!
   </div>
 
   <div class="subtitle">
 
-    To the most
-    <span class="highlight">beautiful soul</span>,
-
-    I hope today fills your heart with happiness,
-    laughter, warmth, peaceful moments,
-    and memories you'll treasure forever.
+    Happy happy birthday Kiraa!! Eto yung top 5 wishes ko for your birthday 💙
 
     <br><br>
 
-    Thank you for existing and making the world
-    brighter just by being in it 🌸
+    1. Kumain ng maraming masusustansyang pagkain tulad ng gulay!<br>
+    2. Laging unahin kalusugan<br>
+    3. Wag makakalimutang pag igihin ang iyong studies<br>
+    4. Imong i sing ang ishi biladi<br>
+    5. At higit sa lahat, wag makakalimutang pasalamatan ang ating panginoong hesus
+
+    <br><br>
+
+    <span class="highlight">
+    Top 3 facts about Kira08
+    </span>
+
+    <br><br>
+
+    1. Sobrang bait walang katulad on god fr<br>
+    2. Madaldal kahit di kinakausap<br>
+    3. Mahilig mag perform ng song number<br>
+    4. And most importanter, sobrang saya kausap!
 
   </div>
 
   <button class="button" onclick="birthdayMessage()">
-    Open Birthday Surprise ✨
+    Postscript ✨
   </button>
 
   <details class="secret">
@@ -528,7 +565,7 @@ body::after{
   </details>
 
   <div class="footer">
-    — From Someone Who Cares 💖
+    — From Someone Extremely Grateful 💖
   </div>
 
 </div>
@@ -541,7 +578,7 @@ body::after{
 
 <script>
 
-/* MUSIC START */
+/* START MUSIC */
 
 document.addEventListener("click", () => {
 
@@ -570,11 +607,23 @@ secretAudio.addEventListener("ended", () => {
   bgMusic.play();
 });
 
-/* BUTTON */
+/* POSTSCRIPT */
 
 function birthdayMessage(){
 
-  alert("🎉 I hope this becomes one of your happiest birthdays ever 💙");
+  alert(`Sorry sobrang na late 🥹 na busy ako kasi may mga deadlines tas tuwing madaling araw ko lang nagagawa yung birthday message and song.
+
+Naisip ko at first ok na siguro yung mag se send nalang ako ng message sa dm's and then yung audio file, kaso minsan lang naman mag greet so why not all out HAHHAHA.
+
+And I really wanted to greet and thank you properly kasi I'm extremely grateful for this friendship.
+
+Sa sobrang dami na nating napag usapan wala na kong masabi sayo HAHAHAHA kaya di na ko nag me message.
+
+Anywayyy, sana nag enjoy ka yesterday and I wish all the best for you.
+
+Medical career, yung crush mo, yung pag piloto mo, yung pag abogado mo tas kung ano ano pa.
+
+Happy birthday Franchesca! 💙`);
 
 }
 
